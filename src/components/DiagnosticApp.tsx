@@ -8,7 +8,17 @@ import { Billing } from "@/components/Billing";
 import { Reports } from "@/components/Reports";
 import { Settings } from "@/components/Settings";
 
-type ActiveModule = "dashboard" | "patients" | "tests" | "billing" | "reports" | "settings";
+type ActiveModule = 
+  | "dashboard" 
+  | "patients" 
+  | "tests" 
+  | "billing" 
+  | "reports" 
+  | "settings"
+  | "analytics"
+  | "inventory"
+  | "staff"
+  | "franchise";
 
 export function DiagnosticApp() {
   const [activeModule, setActiveModule] = useState<ActiveModule>("dashboard");
@@ -28,6 +38,14 @@ export function DiagnosticApp() {
         return <Reports userRole={userRole} />;
       case "settings":
         return <Settings userRole={userRole} />;
+      case "analytics":
+        return <Dashboard userRole={userRole} />; // Placeholder for Analytics
+      case "inventory":
+        return <Dashboard userRole={userRole} />; // Placeholder for Inventory
+      case "staff":
+        return <Dashboard userRole={userRole} />; // Placeholder for Staff
+      case "franchise":
+        return <Dashboard userRole={userRole} />; // Placeholder for Franchise
       default:
         return <Dashboard userRole={userRole} />;
     }
