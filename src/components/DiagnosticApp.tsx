@@ -11,6 +11,13 @@ import { Analytics } from "@/components/Analytics";
 import { Inventory } from "@/components/Inventory";
 import { Staff } from "@/components/Staff";
 import { Franchise } from "@/components/Franchise";
+import { BookingManagement } from "@/components/booking/BookingManagement";
+import { ReportsManagement } from "@/components/reports/ReportsManagement";
+import { BillingManagement } from "@/components/billing/BillingManagement";
+import { InventoryManagement } from "@/components/inventory/InventoryManagement";
+import { StaffManagement } from "@/components/staff/StaffManagement";
+import { FranchiseManagement } from "@/components/franchise/FranchiseManagement";
+import { SettingsManagement } from "@/components/settings/SettingsManagement";
 
 type ActiveModule = 
   | "dashboard" 
@@ -76,11 +83,11 @@ export function DiagnosticApp() {
       
       // BOOKING MODULE
       case "manage-booking":
-        return <PatientManagement userRole={userRole} />; // Booking management
+        return <BookingManagement userRole={userRole} view="all" />;
       case "manage-reports": 
-        return <Reports userRole={userRole} />; // Report management
+        return <ReportsManagement userRole={userRole} view="all" />;
       case "old-reports":
-        return <Reports userRole={userRole} />; // Historical reports
+        return <ReportsManagement userRole={userRole} view="old" />;
       
       // NOTIFICATIONS MODULE  
       case "barcode-mismatch":
@@ -91,35 +98,43 @@ export function DiagnosticApp() {
       
       // BILLING SUBMODULES
       case "generate-bill":
+        return <BillingManagement userRole={userRole} view="new" />;
       case "generate-bill-old":
+        return <BillingManagement userRole={userRole} view="history" />;
       case "online-payment":
+        return <BillingManagement userRole={userRole} view="online" />;
       case "payment-history":
+        return <BillingManagement userRole={userRole} view="history" />;
       case "track-ledger":
+        return <BillingManagement userRole={userRole} view="ledger" />;
       case "commission":
-        return <Billing userRole={userRole} />; // Various billing functions
+        return <BillingManagement userRole={userRole} view="ledger" />;
       case "manage-doctors":
       case "manage-lab":  
       case "test-portfolio":
-        return <Settings userRole={userRole} />; // Management settings
+        return <SettingsManagement userRole={userRole} view="profile" />;
       
       // INVENTORY SUBMODULES
       case "inventory-main":
+        return <InventoryManagement userRole={userRole} view="stock" />;
       case "slide-request":
-        return <Inventory userRole={userRole} />; // Inventory management
+        return <InventoryManagement userRole={userRole} view="requests" />;
       
       // STAFF SUBMODULES
       case "my-staff":
-        return <Staff userRole={userRole} />; // Staff management
+        return <StaffManagement userRole={userRole} view="list" />;
       
       // FRANCHISE SUBMODULES
       case "sub-franchisee":
+        return <FranchiseManagement userRole={userRole} view="list" />;
       case "subfranchisee-pricing": 
+        return <FranchiseManagement userRole={userRole} view="pricing" />;
       case "subfranchisee-credits":
-        return <Franchise userRole={userRole} />; // Franchise management
+        return <FranchiseManagement userRole={userRole} view="credits" />;
       
       // SETTINGS SUBMODULES
       case "generate-certificate":
-        return <Settings userRole={userRole} />; // Certificate generation
+        return <SettingsManagement userRole={userRole} view="certificate" />;
       
       default:
         return <Dashboard userRole={userRole} />;
@@ -134,7 +149,7 @@ export function DiagnosticApp() {
           onModuleChange={setActiveModule}
           userRole={userRole}
         />
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 ml-0 lg:ml-0">
           {renderActiveModule()}
         </main>
       </div>
