@@ -54,15 +54,38 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 
 type ActiveModule = 
   | "dashboard" 
+  | "analytics"
   | "patients" 
   | "tests" 
   | "billing" 
   | "reports" 
   | "settings"
-  | "analytics"
   | "inventory"
   | "staff"
-  | "franchise";
+  | "franchise"
+  | "manage-booking"
+  | "manage-reports" 
+  | "old-reports"
+  | "barcode-mismatch"
+  | "hold"
+  | "clinical"
+  | "cancellations"
+  | "generate-bill"
+  | "generate-bill-old"
+  | "online-payment"
+  | "payment-history"
+  | "track-ledger"
+  | "manage-doctors"
+  | "manage-lab"
+  | "test-portfolio"
+  | "commission"
+  | "inventory-main"
+  | "slide-request"
+  | "my-staff"
+  | "sub-franchisee"
+  | "subfranchisee-pricing"
+  | "subfranchisee-credits"
+  | "generate-certificate";
 
 interface SidebarProps {
   activeModule: ActiveModule;

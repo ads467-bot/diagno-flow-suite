@@ -7,18 +7,45 @@ import { TestCatalogue } from "@/components/TestCatalogue";
 import { Billing } from "@/components/Billing";
 import { Reports } from "@/components/Reports";
 import { Settings } from "@/components/Settings";
+import { Analytics } from "@/components/Analytics";
+import { Inventory } from "@/components/Inventory";
+import { Staff } from "@/components/Staff";
+import { Franchise } from "@/components/Franchise";
 
 type ActiveModule = 
   | "dashboard" 
+  | "analytics"
   | "patients" 
   | "tests" 
   | "billing" 
   | "reports" 
   | "settings"
-  | "analytics"
   | "inventory"
   | "staff"
-  | "franchise";
+  | "franchise"
+  | "manage-booking"
+  | "manage-reports" 
+  | "old-reports"
+  | "barcode-mismatch"
+  | "hold"
+  | "clinical"
+  | "cancellations"
+  | "generate-bill"
+  | "generate-bill-old"
+  | "online-payment"
+  | "payment-history"
+  | "track-ledger"
+  | "manage-doctors"
+  | "manage-lab"
+  | "test-portfolio"
+  | "commission"
+  | "inventory-main"
+  | "slide-request"
+  | "my-staff"
+  | "sub-franchisee"
+  | "subfranchisee-pricing"
+  | "subfranchisee-credits"
+  | "generate-certificate";
 
 export function DiagnosticApp() {
   const [activeModule, setActiveModule] = useState<ActiveModule>("dashboard");
@@ -28,6 +55,8 @@ export function DiagnosticApp() {
     switch (activeModule) {
       case "dashboard":
         return <Dashboard userRole={userRole} />;
+      case "analytics":
+        return <Analytics userRole={userRole} />;
       case "patients":
         return <PatientManagement userRole={userRole} />;
       case "tests":
@@ -38,14 +67,60 @@ export function DiagnosticApp() {
         return <Reports userRole={userRole} />;
       case "settings":
         return <Settings userRole={userRole} />;
-      case "analytics":
-        return <Dashboard userRole={userRole} />; // Placeholder for Analytics
       case "inventory":
-        return <Dashboard userRole={userRole} />; // Placeholder for Inventory
+        return <Inventory userRole={userRole} />;
       case "staff":
-        return <Dashboard userRole={userRole} />; // Placeholder for Staff
+        return <Staff userRole={userRole} />;
       case "franchise":
-        return <Dashboard userRole={userRole} />; // Placeholder for Franchise
+        return <Franchise userRole={userRole} />;
+      
+      // BOOKING MODULE
+      case "manage-booking":
+        return <PatientManagement userRole={userRole} />; // Booking management
+      case "manage-reports": 
+        return <Reports userRole={userRole} />; // Report management
+      case "old-reports":
+        return <Reports userRole={userRole} />; // Historical reports
+      
+      // NOTIFICATIONS MODULE  
+      case "barcode-mismatch":
+      case "hold":
+      case "clinical":
+      case "cancellations":
+        return <Dashboard userRole={userRole} />; // Notification dashboards
+      
+      // BILLING SUBMODULES
+      case "generate-bill":
+      case "generate-bill-old":
+      case "online-payment":
+      case "payment-history":
+      case "track-ledger":
+      case "commission":
+        return <Billing userRole={userRole} />; // Various billing functions
+      case "manage-doctors":
+      case "manage-lab":  
+      case "test-portfolio":
+        return <Settings userRole={userRole} />; // Management settings
+      
+      // INVENTORY SUBMODULES
+      case "inventory-main":
+      case "slide-request":
+        return <Inventory userRole={userRole} />; // Inventory management
+      
+      // STAFF SUBMODULES
+      case "my-staff":
+        return <Staff userRole={userRole} />; // Staff management
+      
+      // FRANCHISE SUBMODULES
+      case "sub-franchisee":
+      case "subfranchisee-pricing": 
+      case "subfranchisee-credits":
+        return <Franchise userRole={userRole} />; // Franchise management
+      
+      // SETTINGS SUBMODULES
+      case "generate-certificate":
+        return <Settings userRole={userRole} />; // Certificate generation
+      
       default:
         return <Dashboard userRole={userRole} />;
     }
