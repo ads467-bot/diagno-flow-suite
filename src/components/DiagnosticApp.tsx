@@ -149,9 +149,11 @@ export function DiagnosticApp() {
           onModuleChange={setActiveModule}
           userRole={userRole}
         />
-        <main className="flex-1 p-6 ml-0 lg:ml-0">
-          {renderActiveModule()}
-        </main>
+        <div className="flex-1 flex flex-col min-w-0">
+          <main className="flex-1 p-6">
+            {renderActiveModule()}
+          </main>
+        </div>
       </div>
     </SidebarProvider>
   );
